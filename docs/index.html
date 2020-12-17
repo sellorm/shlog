@@ -137,7 +137,10 @@ a.sourceLine {
 <div id="TOC" class="toc">
 <div class="inner">
 <ul>
-<li><a href="#installing-shlog">Installing shlog</a></li>
+<li><a href="#installing-shlog">Installing shlog</a>
+<ul>
+<li><a href="#version-0.0.1">Version 0.0.1:</a></li>
+</ul></li>
 <li><a href="#using-shlog">Using shlog</a></li>
 <li><a href="#newline-delimited-json">Newline delimited JSON</a></li>
 <li><a href="#examples">Examples</a></li>
@@ -163,13 +166,19 @@ DO NOT EDIT README.md DIRECTLY, IT IS AUTO-GENERATED FROM README.Rmd!!
 <p>Opinionated by design, <code>shlog</code> has the bare minimum of options to ensure you’re productive with it right from the outset.</p>
 <div id="installing-shlog" class="section level2">
 <h2>Installing shlog</h2>
-<p>Installation must currently be performed manually. Compile the sources from the <a href="https://github.com/sellorm/shlog">GitHub repo</a> and copy the <code>shlog</code> binary somewhere on your <code>$PATH</code>.</p>
+<div id="version-0.0.1" class="section level3">
+<h3>Version 0.0.1:</h3>
+<ul>
+<li><a href="https://github.com/sellorm/shlog/releases/download/v0.0.1/shlog_0.0.1-3_ubuntu2004_amd64.deb">Ubuntu 20.04</a></li>
+<li><a href="https://github.com/sellorm/shlog/releases/download/v0.0.1/shlog_0.0.1-3_ubuntu1804_amd64.deb">Ubuntu 18.04</a></li>
+</ul>
+</div>
 </div>
 <div id="using-shlog" class="section level2">
 <h2>Using shlog</h2>
 <p>The <code>shlog</code> command requires two arguments. A loglevel for the given message and the mesaage itself;</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> info <span class="st">&quot;This is an information message!&quot;</span></span></code></pre></div>
-<pre><code>## 2020-12-17 11:35:33 [  INFO ] This is an information message!</code></pre>
+<pre><code>## 2020-12-17 23:33:12 [  INFO ] This is an information message!</code></pre>
 <p>The available loglevels are (in highest priority first order):</p>
 <ul>
 <li>FATAL</li>
@@ -181,7 +190,7 @@ DO NOT EDIT README.md DIRECTLY, IT IS AUTO-GENERATED FROM README.Rmd!!
 </ul>
 <p>These can be specified in either upper or lower case.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> ERROR <span class="st">&quot;This is an error message&quot;</span></span></code></pre></div>
-<pre><code>## 2020-12-17 11:35:33 [ ERROR ] This is an error message</code></pre>
+<pre><code>## 2020-12-17 23:33:12 [ ERROR ] This is an error message</code></pre>
 <p>By default the loglevel is set to INFO.</p>
 <ul>
 <li>FATAL</li>
@@ -198,7 +207,7 @@ DO NOT EDIT README.md DIRECTLY, IT IS AUTO-GENERATED FROM README.Rmd!!
 <p>So the following will print:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LOGLEVEL=</span>DEBUG</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> DEBUG <span class="st">&quot;This is a debug message&quot;</span></span></code></pre></div>
-<pre><code>## 2020-12-17 11:35:33 [ DEBUG ] This is a debug message</code></pre>
+<pre><code>## 2020-12-17 23:33:12 [ DEBUG ] This is a debug message</code></pre>
 <p>This is because we used the environment variable to tell <code>shlog</code> the lowest type of log message we would like to see.</p>
 <ul>
 <li>FATAL</li>
@@ -216,7 +225,7 @@ DO NOT EDIT README.md DIRECTLY, IT IS AUTO-GENERATED FROM README.Rmd!!
 <p>Set the environment variable <code>SHLOG_JSON</code> to <code>true</code> and logs will be output as newline delimited JSON instead of standard plain text.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SHLOG_JSON=</span>true</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> INFO <span class="st">&quot;This is an info message&quot;</span></span></code></pre></div>
-<pre><code>## {&quot;date&quot;:&quot;2020-12-17&quot;,&quot;time&quot;:&quot;11:35:33&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;This is an info message&quot;}</code></pre>
+<pre><code>## {&quot;date&quot;:&quot;2020-12-17&quot;,&quot;time&quot;:&quot;23:33:12&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;This is an info message&quot;}</code></pre>
 </div>
 <div id="examples" class="section level2">
 <h2>Examples</h2>
@@ -224,13 +233,13 @@ DO NOT EDIT README.md DIRECTLY, IT IS AUTO-GENERATED FROM README.Rmd!!
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LOGLEVEL=</span>INFO</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> info <span class="st">&quot;This is an info message&quot;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> DEBUG <span class="st">&quot;This is a debug message&quot;</span></span></code></pre></div>
-<pre><code>## 2020-12-17 11:35:33 [  INFO ] This is an info message</code></pre>
+<pre><code>## 2020-12-17 23:33:12 [  INFO ] This is an info message</code></pre>
 <p>Both messages are printed:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LOGLEVEL=</span>debug</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> info <span class="st">&quot;This is an info message&quot;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> DEBUG <span class="st">&quot;This is a debug message&quot;</span></span></code></pre></div>
-<pre><code>## 2020-12-17 11:35:33 [  INFO ] This is an info message
-## 2020-12-17 11:35:33 [ DEBUG ] This is a debug message</code></pre>
+<pre><code>## 2020-12-17 23:33:12 [  INFO ] This is an info message
+## 2020-12-17 23:33:12 [ DEBUG ] This is a debug message</code></pre>
 <p>Everything from <code>WARN</code> and above is printed:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LOGLEVEL=</span>WARN</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> FATAL <span class="st">&quot;This is a FATAL message&quot;</span></span>
@@ -239,17 +248,17 @@ DO NOT EDIT README.md DIRECTLY, IT IS AUTO-GENERATED FROM README.Rmd!!
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> INFO <span class="st">&quot;This is an INFO message&quot;</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> DEBUG <span class="st">&quot;This is a DEBUG message&quot;</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> TRACE <span class="st">&quot;This is a TRACE message&quot;</span></span></code></pre></div>
-<pre><code>## 2020-12-17 11:35:33 [ FATAL ] This is a FATAL message
-## 2020-12-17 11:35:33 [ ERROR ] This is an ERROR message
-## 2020-12-17 11:35:33 [  WARN ] This is a WARN message</code></pre>
+<pre><code>## 2020-12-17 23:33:12 [ FATAL ] This is a FATAL message
+## 2020-12-17 23:33:12 [ ERROR ] This is an ERROR message
+## 2020-12-17 23:33:12 [  WARN ] This is a WARN message</code></pre>
 <p>Only the first message is printed and all messages use JSON output:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LOGLEVEL=</span>INFO</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SHLOG_JSON=</span>true</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> info <span class="st">&quot;This is an info message&quot;</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> DEBUG <span class="st">&quot;This is a debug message&quot;</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./shlog</span> error <span class="st">&quot;This is an error message&quot;</span></span></code></pre></div>
-<pre><code>## {&quot;date&quot;:&quot;2020-12-17&quot;,&quot;time&quot;:&quot;11:35:33&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;This is an info message&quot;}
-## {&quot;date&quot;:&quot;2020-12-17&quot;,&quot;time&quot;:&quot;11:35:33&quot;,&quot;level&quot;:&quot;ERROR&quot;,&quot;message&quot;:&quot;This is an error message&quot;}</code></pre>
+<pre><code>## {&quot;date&quot;:&quot;2020-12-17&quot;,&quot;time&quot;:&quot;23:33:12&quot;,&quot;level&quot;:&quot;INFO&quot;,&quot;message&quot;:&quot;This is an info message&quot;}
+## {&quot;date&quot;:&quot;2020-12-17&quot;,&quot;time&quot;:&quot;23:33:12&quot;,&quot;level&quot;:&quot;ERROR&quot;,&quot;message&quot;:&quot;This is an error message&quot;}</code></pre>
 </div>
 <div id="working-on-shlog" class="section level2">
 <h2>Working on shlog</h2>

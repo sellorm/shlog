@@ -13,8 +13,11 @@ README.md: README.Rmd
 	R -q -e "rmarkdown::render('README.Rmd', output_format = 'github_document', clean = TRUE, output_file = 'README.md')"
 	-rm README.html
 
+build:
+	./build.sh
+
 clean:
 	-rm README.md
 	-rm docs/index.html
 
-.PHONY: test clean
+.PHONY: test clean build
