@@ -7,12 +7,12 @@ DO NOT EDIT README.md DIRECTLY, IT IS AUTO-GENERATED FROM README.Rmd!!
 
 You write shell scripts, right?
 
-And you’re always knocking some sort of rough logging solution together
+And you’re always knocking together some sort of rough logging solution
 for each script.
 
 We know, because we were exactly the same! And that’s why we created
 `shlog`, an easy to use, small, fast tool for printing consistent log
-messages directly to the terminal from your script
+messages directly to the terminal from your script.
 
 Opinionated by design, `shlog` has the bare minimum of options to ensure
 you’re productive with it right from the outset.
@@ -32,7 +32,7 @@ message and the mesaage itself;
 ./shlog info "This is an information message!"
 ```
 
-    ## 2020-12-15 23:33:00 [  INFO ] This is an information message!
+    ## 2020-12-17 11:35:34 [  INFO ] This is an information message!
 
 The available loglevels are (in highest priority first order):
 
@@ -49,7 +49,7 @@ These can be specified in either upper or lower case.
 ./shlog ERROR "This is an error message"
 ```
 
-    ## 2020-12-15 23:33:00 [ ERROR ] This is an error message
+    ## 2020-12-17 11:35:34 [ ERROR ] This is an error message
 
 By default the loglevel is set to INFO.
 
@@ -79,7 +79,7 @@ export LOGLEVEL=DEBUG
 ./shlog DEBUG "This is a debug message"
 ```
 
-    ## 2020-12-15 23:33:00 [ DEBUG ] This is a debug message
+    ## 2020-12-17 11:35:34 [ DEBUG ] This is a debug message
 
 This is because we used the environment variable to tell `shlog` the
 lowest type of log message we would like to see.
@@ -94,6 +94,21 @@ lowest type of log message we would like to see.
 `shlog` also supports two special environment variables, `ALL` and
 `OFF`, which print all messages or turns all messages off respectively.
 
+## Newline delimited JSON
+
+Perhaps your shell script project is part of something larger and you’d
+prefer structured log output. Don’t worry, `shlog` has your back.
+
+Set the environment variable `SHLOG_JSON` to `true` and logs will be
+output as newline delimited JSON instead of standard plain text.
+
+``` bash
+export SHLOG_JSON=true
+./shlog INFO "This is an info message"
+```
+
+    ## {"date":"2020-12-17","time":"11:35:34","level":"INFO","message":"This is an info message"}
+
 ## Examples
 
 Only the first message is printed:
@@ -104,7 +119,7 @@ export LOGLEVEL=INFO
 ./shlog DEBUG "This is a debug message"
 ```
 
-    ## 2020-12-15 23:33:00 [  INFO ] This is an info message
+    ## 2020-12-17 11:35:34 [  INFO ] This is an info message
 
 Both messages are printed:
 
@@ -114,8 +129,8 @@ export LOGLEVEL=debug
 ./shlog DEBUG "This is a debug message"
 ```
 
-    ## 2020-12-15 23:33:00 [  INFO ] This is an info message
-    ## 2020-12-15 23:33:00 [ DEBUG ] This is a debug message
+    ## 2020-12-17 11:35:34 [  INFO ] This is an info message
+    ## 2020-12-17 11:35:34 [ DEBUG ] This is a debug message
 
 Everything from `WARN` and above is printed:
 
@@ -129,9 +144,22 @@ export LOGLEVEL=WARN
 ./shlog TRACE "This is a TRACE message"
 ```
 
-    ## 2020-12-15 23:33:00 [ FATAL ] This is a FATAL message
-    ## 2020-12-15 23:33:00 [ ERROR ] This is an ERROR message
-    ## 2020-12-15 23:33:00 [  WARN ] This is a WARN message
+    ## 2020-12-17 11:35:34 [ FATAL ] This is a FATAL message
+    ## 2020-12-17 11:35:34 [ ERROR ] This is an ERROR message
+    ## 2020-12-17 11:35:34 [  WARN ] This is a WARN message
+
+Only the first message is printed and all messages use JSON output:
+
+``` bash
+export LOGLEVEL=INFO
+export SHLOG_JSON=true
+./shlog info "This is an info message"
+./shlog DEBUG "This is a debug message"
+./shlog error "This is an error message"
+```
+
+    ## {"date":"2020-12-17","time":"11:35:34","level":"INFO","message":"This is an info message"}
+    ## {"date":"2020-12-17","time":"11:35:34","level":"ERROR","message":"This is an error message"}
 
 ## Working on shlog
 
@@ -164,6 +192,17 @@ this:
     LOGLEVEL is fatal
     2020-12-15 23:28:20 [ FATAL ] this message is fatal
     2020-12-15 23:28:20 [ FATAL ] this message is FATAL
+
+It will then repeat all the tests with `SHLOG_JSON=true` to output
+newline delimited JSON, like this:
+
+    LOGLEVEL is WARN
+    {"date":"2020-12-17","time":"11:04:08","level":"WARN","message":"this message is warn"}
+    {"date":"2020-12-17","time":"11:04:08","level":"WARN","message":"this message is WARN"}
+    {"date":"2020-12-17","time":"11:04:08","level":"ERROR","message":"this message is error"}
+    {"date":"2020-12-17","time":"11:04:08","level":"ERROR","message":"this message is ERROR"}
+    {"date":"2020-12-17","time":"11:04:08","level":"FATAL","message":"this message is fatal"}
+    {"date":"2020-12-17","time":"11:04:08","level":"FATAL","message":"this message is FATAL"}
 
 ## License
 

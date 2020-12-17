@@ -14,17 +14,18 @@ DO NOT EDIT README.md DIRECTLY, IT IS AUTO-GENERATED FROM README.Rmd!!
 
 You write shell scripts, right?
 
-And you're always knocking some sort of rough logging solution together for each script.
+And you're always knocking together some sort of rough logging solution for each script.
 
 We know, because we were exactly the same! And that's why we created `shlog`, an easy to use,
-small, fast tool for printing consistent log messages directly to the terminal from your script
+small, fast tool for printing consistent log messages directly to the terminal from your script.
 
 Opinionated by design, `shlog` has the bare minimum of options to ensure you're productive with it right from the outset.
 
 
 ## Installing shlog
 
-Installation must currently be performed manually. Compile the sources from the [GitHub repo](https://github.com/sellorm/shlog) and copy the `shlog` binary somewhere on your `$PATH`.
+Installation must currently be performed manually. Compile the sources from the
+[GitHub repo](https://github.com/sellorm/shlog) and copy the `shlog` binary somewhere on your `$PATH`.
 
 ## Using shlog
 
@@ -85,7 +86,21 @@ This is because we used the environment variable to tell `shlog` the lowest type
 * DEBUG  <--
 * TRACE
 
-`shlog` also supports two special environment variables, `ALL` and `OFF`, which print all messages or turns all messages off respectively.
+`shlog` also supports two special environment variables, `ALL` and `OFF`, which print all messages or turns all
+messages off respectively.
+
+## Newline delimited JSON
+
+Perhaps your shell script project is part of something larger and you'd prefer structured log output. Don't worry,
+`shlog` has your back.
+
+Set the environment variable `SHLOG_JSON` to `true` and logs will be output as newline delimited JSON instead of
+standard plain text.
+
+```{bash}
+export SHLOG_JSON=true
+./shlog INFO "This is an info message"
+```
 
 ## Examples
 
@@ -115,6 +130,16 @@ export LOGLEVEL=WARN
 ./shlog INFO "This is an INFO message"
 ./shlog DEBUG "This is a DEBUG message"
 ./shlog TRACE "This is a TRACE message"
+```
+
+Only the first message is printed and all messages use JSON output:
+
+```{bash}
+export LOGLEVEL=INFO
+export SHLOG_JSON=true
+./shlog info "This is an info message"
+./shlog DEBUG "This is a debug message"
+./shlog error "This is an error message"
 ```
 
 
@@ -155,6 +180,18 @@ LOGLEVEL is ERROR
 LOGLEVEL is fatal
 2020-12-15 23:28:20 [ FATAL ] this message is fatal
 2020-12-15 23:28:20 [ FATAL ] this message is FATAL
+```
+
+It will then repeat all the tests with `SHLOG_JSON=true` to output newline delimited JSON, like this:
+
+```
+LOGLEVEL is WARN
+{"date":"2020-12-17","time":"11:04:08","level":"WARN","message":"this message is warn"}
+{"date":"2020-12-17","time":"11:04:08","level":"WARN","message":"this message is WARN"}
+{"date":"2020-12-17","time":"11:04:08","level":"ERROR","message":"this message is error"}
+{"date":"2020-12-17","time":"11:04:08","level":"ERROR","message":"this message is ERROR"}
+{"date":"2020-12-17","time":"11:04:08","level":"FATAL","message":"this message is fatal"}
+{"date":"2020-12-17","time":"11:04:08","level":"FATAL","message":"this message is FATAL"}
 ```
 
 ## License
