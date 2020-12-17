@@ -78,6 +78,22 @@ int main(int argc, char **argv)
         // printf("LOGLEVEL is: %s (%d)\n", ENVLOGLEVEL, loglevel);
     }
 
+
+    // check if JSON output (NDJSON) is requested
+    char* ENVJSON = getenv("SHLOG_JSON");
+    int jsonoutput;
+    if(ENVJSON != NULL){
+        if( strcmp(ENVJSON, "true") == 0)
+        {
+            jsonoutput = 1;
+        } else {
+            jsonoutput = 0;
+        }
+    } else {
+        jsonoutput = 0;
+    }
+
+
     // variables to store date and time components
     int hours, minutes, seconds, day, month, year;
 
@@ -120,7 +136,12 @@ int main(int argc, char **argv)
     int msglevel = numloglvl(argv[1]);
     if (msglevel >= loglevel)
     {
-        printf("%02d-%02d-%d %02d:%02d:%02d [ %5s ] %s\n", year, month, day, hours, minutes, seconds, upper_msg_level, argv[2]);
+        if(jsonoutput == 1)
+        {
+            printf("{\"date\":\"%02d-%02d-%d\",\"time\":\"%02d:%02d:%02d\",\"level\":\"%s\",\"message\":\"%s\"}\n", year, month, day, hours, minutes, seconds, upper_msg_level, argv[2]);
+        } else {
+            printf("%02d-%02d-%d %02d:%02d:%02d [ %5s ] %s\n", year, month, day, hours, minutes, seconds, upper_msg_level, argv[2]);
+        }
     }
     return 0;
 }

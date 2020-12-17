@@ -3,6 +3,7 @@ shlog: shlog.c
 
 test: test.sh shlog
 	./test.sh
+	SHLOG_JSON=true ./test.sh
 
 README.md: README.Rmd 
 	-rm README.html
