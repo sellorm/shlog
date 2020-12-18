@@ -134,7 +134,7 @@ export LOGLEVEL=WARN
 ./shlog TRACE "This is a TRACE message"
 ```
 
-Only the first message is printed and all messages use JSON output:
+Only two out of these three messages are at loglevel or above and all messages use JSON output:
 
 ```{bash}
 export LOGLEVEL=INFO
@@ -198,4 +198,4 @@ LOGLEVEL is WARN
 
 ## License
 
-This work is release under the [MIT License](https://github.com/sellorm/shlog/blob/main/LICENSE) by Mark Sellors.
+This work is released under the [MIT License](https://github.com/sellorm/shlog/blob/main/LICENSE) by [Mark Sellors](https://blog.sellorm.com).

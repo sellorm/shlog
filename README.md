@@ -35,7 +35,7 @@ message and the mesaage itself;
 ./shlog info "This is an information message!"
 ```
 
-    ## 2020-12-17 23:33:13 [  INFO ] This is an information message!
+    ## 2020-12-18 09:33:35 [  INFO ] This is an information message!
 
 The available loglevels are (in highest priority first order):
 
@@ -52,7 +52,7 @@ These can be specified in either upper or lower case.
 ./shlog ERROR "This is an error message"
 ```
 
-    ## 2020-12-17 23:33:13 [ ERROR ] This is an error message
+    ## 2020-12-18 09:33:35 [ ERROR ] This is an error message
 
 By default the loglevel is set to INFO.
 
@@ -82,7 +82,7 @@ export LOGLEVEL=DEBUG
 ./shlog DEBUG "This is a debug message"
 ```
 
-    ## 2020-12-17 23:33:13 [ DEBUG ] This is a debug message
+    ## 2020-12-18 09:33:35 [ DEBUG ] This is a debug message
 
 This is because we used the environment variable to tell `shlog` the
 lowest type of log message we would like to see.
@@ -110,7 +110,7 @@ export SHLOG_JSON=true
 ./shlog INFO "This is an info message"
 ```
 
-    ## {"date":"2020-12-17","time":"23:33:13","level":"INFO","message":"This is an info message"}
+    ## {"date":"2020-12-18","time":"09:33:35","level":"INFO","message":"This is an info message"}
 
 ## Examples
 
@@ -122,7 +122,7 @@ export LOGLEVEL=INFO
 ./shlog DEBUG "This is a debug message"
 ```
 
-    ## 2020-12-17 23:33:13 [  INFO ] This is an info message
+    ## 2020-12-18 09:33:35 [  INFO ] This is an info message
 
 Both messages are printed:
 
@@ -132,8 +132,8 @@ export LOGLEVEL=debug
 ./shlog DEBUG "This is a debug message"
 ```
 
-    ## 2020-12-17 23:33:13 [  INFO ] This is an info message
-    ## 2020-12-17 23:33:13 [ DEBUG ] This is a debug message
+    ## 2020-12-18 09:33:35 [  INFO ] This is an info message
+    ## 2020-12-18 09:33:35 [ DEBUG ] This is a debug message
 
 Everything from `WARN` and above is printed:
 
@@ -147,11 +147,12 @@ export LOGLEVEL=WARN
 ./shlog TRACE "This is a TRACE message"
 ```
 
-    ## 2020-12-17 23:33:13 [ FATAL ] This is a FATAL message
-    ## 2020-12-17 23:33:13 [ ERROR ] This is an ERROR message
-    ## 2020-12-17 23:33:13 [  WARN ] This is a WARN message
+    ## 2020-12-18 09:33:35 [ FATAL ] This is a FATAL message
+    ## 2020-12-18 09:33:35 [ ERROR ] This is an ERROR message
+    ## 2020-12-18 09:33:35 [  WARN ] This is a WARN message
 
-Only the first message is printed and all messages use JSON output:
+Only two out of these three messages are at loglevel or above and all
+messages use JSON output:
 
 ``` bash
 export LOGLEVEL=INFO
@@ -161,8 +162,8 @@ export SHLOG_JSON=true
 ./shlog error "This is an error message"
 ```
 
-    ## {"date":"2020-12-17","time":"23:33:13","level":"INFO","message":"This is an info message"}
-    ## {"date":"2020-12-17","time":"23:33:13","level":"ERROR","message":"This is an error message"}
+    ## {"date":"2020-12-18","time":"09:33:35","level":"INFO","message":"This is an info message"}
+    ## {"date":"2020-12-18","time":"09:33:35","level":"ERROR","message":"This is an error message"}
 
 ## Working on shlog
 
@@ -209,6 +210,6 @@ newline delimited JSON, like this:
 
 ## License
 
-This work is release under the [MIT
-License](https://github.com/sellorm/shlog/blob/main/LICENSE) by Mark
-Sellors.
+This work is released under the [MIT
+License](https://github.com/sellorm/shlog/blob/main/LICENSE) by [Mark
+Sellors](https://blog.sellorm.com).
